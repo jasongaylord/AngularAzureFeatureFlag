@@ -7,3 +7,6 @@ This project uses the following:
 - [Angular CLI version 9.1.8](https://github.com/angular/angular-cli)
 - [Azure App Configuration 1.1.0](https://jasong.us/38bjkD0)
 - [Azure Identity](https://jasong.us/3dbAyB2)
+
+## Server-Side Article
+If you are interested in the server-side version of this article and repository, read the post titled [Adding Azure Feature Flags to Your ASP.NET Razor Pages Application](https://jasong.us/2AL2pdP)
