@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { features } from 'process';
-
-import { ShowAboutMe } from './showAboutMeFeature';
+import { AppConfigurationClient } from "@azure/app-configuration";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,7 @@ import { ShowAboutMe } from './showAboutMeFeature';
       <h1>
         Welcome to {{title}}!
       </h1>
-      <p>Here is the {{aboutFeatureEnabled}}</p>
+      <p>Here is the value: {{aboutMeFeature | async}}</p>
       <span style="display: block">{{ title }} app is running!</span>
       <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
     </div>
@@ -33,5 +32,14 @@ import { ShowAboutMe } from './showAboutMeFeature';
 })
 export class AppComponent {
   title = 'AngularAzureFeatureFlag';
-  aboutFeatureEnabled = ShowAboutMe();
+  aboutMeFeature = this.ShowAboutMe();
+
+  async ShowAboutMe() {
+    const conn = 'AZ_CONFIG_CONNECTION';
+    const client = new AppConfigurationClient(conn);
+
+    var val = await client.getConfigurationSetting({ key: ".appconfig.featureflag/ShowAboutMe" });
+
+    return JSON.parse(val.value).enabled;
+  }
 }
