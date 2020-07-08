@@ -5,7 +5,7 @@ This repository was created for a post titled [Adding Azure Feature Flags to Cli
 This project uses the following:
 
 - [Angular CLI version 9.1.8](https://github.com/angular/angular-cli)
-- [Azure App Configuration 1.1.0](https://jasong.us/38bjkD0)
+- [Azure App Configuration 1.1.0](https://jasong.us/38EOoLZ)
 - [Azure Identity](https://jasong.us/3dbAyB2)
 
 ## Server-Side Article
